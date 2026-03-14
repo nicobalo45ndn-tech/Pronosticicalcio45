@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pronosticicalcio45</title>
+
+<style>
+body { font-family: Arial, sans-serif; background: #f2f4f7; margin:0; }
+header { background: #00adb5; color: white; padding: 15px; text-align: center; font-size: 22px;}
+.match { background: white; margin: 15px; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
+button { background:#00adb5; color:white; border:none; padding:10px; border-radius:6px; margin-top:10px;}
+</style>
+
+</head>
+<body>
+
+<header>Pronosticicalcio45</header>
+
+<div id="matches"></div>
+
+<script>
+
+const matches = [
+{home:"Juventus",away:"Inter",xg1:1.7,xg2:1.2,corners:10,shots:14},
+{home:"Milan",away:"Napoli",xg1:1.3,xg2:1.5,corners:9,shots:13}
+];
+
+function pronostico(m){
+let over = (m.xg1+m.xg2)>2.5?"Over 2.5":"Under 2.5";
+let esito = m.xg1>m.xg2?"1":m.xg2>m.xg1?"2":"X";
+return esito+" + "+over;
+}
+
+let html="";
+matches.forEach(m=>{
+html+=`
+<div class="match">
+<h3>${m.home} vs ${m.away}</h3>
+<p>xG: ${m.xg1} - ${m.xg2}</p>
+<p>Corner previsti: ${m.corners}</p>
+<p>Tiri previsti: ${m.shots}</p>
+<button onclick="alert('${pronostico(m)}')">Pronostico AI</button>
+</div>
+`;
+});
+
+document.getElementById("matches").innerHTML=html;
+
+</script>
+
+</body>
+</html>
